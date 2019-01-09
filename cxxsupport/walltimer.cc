@@ -38,7 +38,7 @@
 #ifdef WINDOWSCINDER
 #include "c_utils\walltime_c.h"
 #else
-#include "walltime_c.h"
+#include "c_utils/walltime_c.h"
 #endif
 #include "error_handling.h"
 #include "mpi_support.h"

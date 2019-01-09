@@ -234,7 +234,7 @@ int main (int argc, const char **argv)
 	if (master)
 	  {
 	    cout << endl << "reading file Background/" << outfile << " ..." << endl;
-	    
+
 	    LS_Image img;
 	    img.read_TGA("Background/"+outfile+".tga");
 
@@ -329,7 +329,7 @@ int main (int argc, const char **argv)
 
     if (master && (gamma != 1.0 || helligkeit != 0.0 || kontrast != 1.0))
       {
-	cout << endl << "immage enhancement (gamma,brightness,contrast) = ("
+	cout << endl << "image enhancement (gamma,brightness,contrast) = ("
 	     << gamma << "," << helligkeit << "," << kontrast << ")" << endl;
 #pragma omp parallel for
         for (tsize i=0; i<pic.size1(); ++i)

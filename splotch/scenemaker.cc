@@ -765,7 +765,7 @@ void sceneMaker::fetchFiles(vector<particle_sim> &particle_data, double fidx)
   if (mpiMgr.master())
     cout << endl << "reading data ..." << endl;
   int simtype = params.find<int>("simtype");
-  int spacing = params.find<double>("snapshot_spacing",1);
+  int spacing = params.find<int>("snapshot_spacing",1);
   int snr1_guess = int(fidx/spacing)*spacing, snr2_guess=snr1_guess+spacing;
   int snr1 = params.find<int>("snapshot_base1",snr1_guess);
   int snr2 = params.find<int>("snapshot_base2",snr2_guess);

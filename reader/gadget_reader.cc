@@ -113,14 +113,14 @@ void gadget_reader(paramfile &params, int interpol_mode,
 {
   int numfiles = params.find<int>("numfiles",1);
   bool doswap = params.find<bool>("swap_endian",false);
-  //string infilename = params.find<string>("infile");
+
   int readparallel = params.find<int>("readparallel",1);
   int ptypes = params.find<int>("ptypes",1);
   int ptype_found = -1, ntot = 1;
 
   string infilename = params.find<string>("infile");
   string snapdir    = params.find<string>("snapdir",string(""));
-  //  cout << snapdir << endl;
+
   string datadir    = params.find<string>("datadir",string(""));
   string filename;
 
@@ -204,7 +204,7 @@ void gadget_reader(paramfile &params, int interpol_mode,
         if(numfiles>1) filename+="."+dataToString(file);
         infile.open(filename.c_str(),doswap);
         planck_assert (infile,"could not open input file! <" + filename + ">");
-        // Read header gets numparticles of each type for both this particular file (npartthis) and 
+        // Read header gets numparticles of each type for both this particular file (npartthis) and
         // the whole dump (nparttotal)
         gadget_read_header(infile,npartthis,time,nparttotal,boxsize,params);
         infile.close();
@@ -572,7 +572,7 @@ void gadget_reader(paramfile &params, int interpol_mode,
           {
 	    if(mpiMgr.master())
 	      cout << " WARNING: Patching IDs for gas particles!" << endl;
- 
+
             MyIDType bits=1;
             if (sizeof(MyIDType)==4)
             { // IDs are 32 bit unsigned integers

@@ -52,7 +52,7 @@ SYSTYPE="generic"
 ### generic SLES11 Linux machines at the Garching computing center (RZG):
 #SYSTYPE="RZG-SLES11-generic"
 
-### Generic MIC cluster in native and offload modes 
+### Generic MIC cluster in native and offload modes
 #SYSTYPE="MIC-native"
 #SYSTYPE="MIC-offload"
 
@@ -89,7 +89,7 @@ ifeq ($(SYSTYPE),"generic")
   NVCC       =  nvcc
   NVCCARCH = -arch=sm_30
   NVCCFLAGS = -g  $(NVCCARCH) -dc -std=c++11
-  CUDA_HOME  =  /opt/nvidia/cudatoolkit/default 
+  CUDA_HOME  =  /opt/nvidia/cudatoolkit/default
   LIB_OPT  += -L$(CUDA_HOME)/lib64 -lcudart
   SUP_INCL += -I$(CUDA_HOME)/include
   endif
@@ -139,7 +139,7 @@ ifeq ($(SYSTYPE),"Linux-cluster")
   else
    CC  = g++
   endif
-  OPTIMIZE += -O2 
+  OPTIMIZE += -O2
   OMP = -fopenmp
   ifeq (CUDA,$(findstring CUDA,$(OPT)))
   CUDA_HOME = /usr/local/cuda/
