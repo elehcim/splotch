@@ -115,6 +115,9 @@ void gadget_reader(paramfile &params, int interpol_mode,
   bool doswap = params.find<bool>("swap_endian",false);
 
   int readparallel = params.find<int>("readparallel",1);
+  bool padding = params.find<bool>("padding", true);
+  tsize padding_size = params.find<tsize>("padding_size", 3);
+
   int ptypes = params.find<int>("ptypes",1);
   int ptype_found = -1, ntot = 1;
 
@@ -131,11 +134,6 @@ void gadget_reader(paramfile &params, int interpol_mode,
   arr<int> ThisTaskReads(NTasks), DataFromTask(NTasks);
   arr<long> NPartThisTask(NTasks);
 
-  //  infilename += intToString(snr,3);
-  //  if (params.find<bool>("snapdir",false))
-  //    infilename = "snapdir_"+intToString(snr,3)+"/"+infilename;
-
-
   // --- construct the filename (prefix) for the data files ---
   //     (uses the variable filename as temporary variable)
   filename.clear();
@@ -143,22 +141,26 @@ void gadget_reader(paramfile &params, int interpol_mode,
   //     e.g. "/data/"
   if (datadir.size()>0)
     filename += datadir+"/";
-  //
+
   // (2) below the data directory, add a snapshot directory
   //     which is numbered by definition
   //     e.g. "/data/snapshot_000/"
   if (snapdir.size()>0)
   {
-    filename += snapdir+intToString(snr,3)+"/";
+    filename += snapdir+intToString(snr,padding_size)+"/";
   }
-  //
+
+  filename += infilename;
+
   // (3) add a number to the filename, which is done always based on snr
   //     e.g. "/data/snapshot_000/snap_000"
-  filename += infilename+intToString(snr,3);
+  if (padding)
+      filename += intToString(snr, padding_size);
+
   infilename = filename;
   filename.clear();
-  // ---
 
+  cout << " Going to read: " << infilename << endl;
 
 
   planck_assert(numfiles >= readparallel,
